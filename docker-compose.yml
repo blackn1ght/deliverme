@@ -1,11 +1,32 @@
-version: "3"
+version: '3.7'
+
+volumes:
+  elasticsearch:
+
+networks:
+  deliverme:
 
 services:
+
+  elasticsearch:
+    image: elasticsearch:6.5.3
+    volumes:
+      - elasticsearch:/usr/share/elasticsearch/data
+    networks:
+      - deliverme
+
+  kibana:
+    image: kibana:6.5.3
+    networks:
+      - deliverme
+
   deliverme_header:
     build: ./apps/header/
     container_name: deliverme_header
     environment:
       - NODE_ENV=production
+    networks:
+      - deliverme
     expose:
       - "3100"
 
@@ -14,6 +35,8 @@ services:
     container_name: deliverme_homepage
     environment:
       - NODE_ENV=production
+    networks:
+      - deliverme
     expose:
       - "3001"
     links:
@@ -26,6 +49,8 @@ services:
     container_name: deliverme_lister
     environment:
       - NODE_ENV=production
+    networks:
+      - deliverme
     expose:
       - "3002"
     links:
@@ -40,6 +65,8 @@ services:
     container_name: deliverme_business_search_service
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
+    networks:
+      - deliverme
     expose:
       - "80"
     links:
@@ -53,6 +80,8 @@ services:
     environment:
       - "ACCEPT_EULA=Y"
       - "SA_PASSWORD=pass123!"
+    networks:
+      - deliverme
     expose:
       - "1443"
 
@@ -60,6 +89,8 @@ services:
     image: nginx:latest
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - deliverme
     ports:
       - 3000:80
     depends_on:

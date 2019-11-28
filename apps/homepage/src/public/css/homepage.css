@@ -42,11 +42,12 @@ body {
 
 .search-container button {
   border: 1px solid #F5F3F5;
-  background-color: #332E3C;
+  background-color: #576CA8;
   color: #fff;
   border-radius: 4px;
   min-width: 75px;
   font-weight: bold;
+  font-size: 1.1rem;
 }
 
 .input-group {

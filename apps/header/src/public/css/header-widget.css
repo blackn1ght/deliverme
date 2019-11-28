@@ -20,7 +20,7 @@
 
   .header-container__controls button {
     border-radius: 2px;
-    padding: 7px;
+    padding: 7px 12px;
     font-size: 1.1rem;
     font-weight: 600;
   }

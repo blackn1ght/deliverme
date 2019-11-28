@@ -5,3 +5,4 @@ dist/
 [Oo]bj/
 .vscode
 .vs
+.htpasswd

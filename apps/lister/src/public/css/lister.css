@@ -1,0 +1,39 @@
+body {
+  margin: 0;
+  font-family: 'Cabin', sans-serif;
+  color: #302B27;
+}
+
+.app-container {
+  margin: 0 auto;
+  max-width: 768px;
+}
+
+.result {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #576CA8;
+}
+
+.result .tags .tag {
+  display: inline-flex;
+  padding: 5px;
+  border: 1px solid #274690;
+  border-radius: 2px;
+  color: #274690;
+  font-size: 0.8rem;
+  margin-right: 2px;
+}
+
+.result .actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-success {
+  border-radius: 2px;
+  color: #fff;
+  background-color: green;
+  padding: 10px;
+  border: 1px solid green;
+}

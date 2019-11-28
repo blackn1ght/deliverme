@@ -1,0 +1,35 @@
+html
+  head
+    title DeliverMe
+    link(
+      href="https://fonts.googleapis.com/css?family=Cabin&display=swap",
+      rel="stylesheet"
+    )
+    link(
+      rel='stylesheet',
+      href='/css/homepage.css'
+    )
+    link(
+      rel='stylesheet', 
+      href=headerCss
+    )
+
+  body
+    div.header
+      div !{headerHtml}
+    div.app-container
+      div.hero
+        h1.intro Get stuff delivered to you.
+        div.search-container
+          form(
+            method='GET'
+            action='/search'
+          )
+            div.input-group
+              input(
+                type='text',
+                value='',
+                name='postcode'
+                placeholder='Where are you? e.g PR7 7BF'
+              )
+              button(type='submit') Find

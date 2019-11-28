@@ -1,0 +1,32 @@
+html
+  head
+    title DeliverMe
+    link(
+      href="https://fonts.googleapis.com/css?family=Cabin&display=swap",
+      rel="stylesheet"
+    )
+    link(
+      rel='stylesheet',
+      href='/css/lister.css'
+    )
+    link(
+      rel='stylesheet', 
+      href=headerCss
+    )
+
+  body
+    div.header
+      div !{headerHtml}
+    div.app-container
+      h2.results #{results.totalNumberOfItems} Results for '#{postcode}'
+      div.results-container
+        each val in results.items
+          div.result
+            h4= val.companyName
+            p.description= val.description
+            div.tags
+              each tag in val.tags
+                div.tag= tag
+            div.actions
+              button.btn-success Details
+            

@@ -1,0 +1,20 @@
+{
+  "name": "deliverme-homepage",
+  "version": "1.0.0",
+  "description": "An app glues together various components to create a unified homepage.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "SET NODE_ENV=development & nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tom Cowell",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.0",
+    "pug": "^2.0.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.1"
+  }
+}

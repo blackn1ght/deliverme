@@ -1,0 +1,68 @@
+version: "3"
+
+services:
+  deliverme_header:
+    build: ./apps/header/
+    container_name: deliverme_header
+    environment:
+      - NODE_ENV=production
+    expose:
+      - "3100"
+
+  deliverme_homepage:
+    build: ./apps/homepage/
+    container_name: deliverme_homepage
+    environment:
+      - NODE_ENV=production
+    expose:
+      - "3001"
+    links:
+      - deliverme_header
+    depends_on:
+      - deliverme_header
+
+  deliverme_lister:
+    build: ./apps/lister/
+    container_name: deliverme_lister
+    environment:
+      - NODE_ENV=production
+    expose:
+      - "3002"
+    links:
+      - deliverme_header
+      - deliverme_business_search_service
+    depends_on:
+      - deliverme_header
+      - deliverme_business_search_service
+
+  deliverme_business_search_service:
+    build: ./apps/business-search-service/
+    container_name: deliverme_business_search_service
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    expose:
+      - "80"
+    links:
+      - db
+    depends_on:
+      - db
+
+  db:
+    image: microsoft/mssql-server-linux:2017-latest
+    container_name: db
+    environment:
+      - "ACCEPT_EULA=Y"
+      - "SA_PASSWORD=pass123!"
+    expose:
+      - "1443"
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 3000:80
+    depends_on:
+      - deliverme_header
+      - deliverme_homepage
+      - deliverme_lister

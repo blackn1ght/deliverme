@@ -1,0 +1,56 @@
+body {
+  margin: 0;
+  font-family: 'Cabin', sans-serif;
+  color: #302B27;
+}
+
+.app-container {
+  text-align: center;
+}
+
+.hero {
+  padding: 30px 0 130px 0;
+  background-color: #1B264F;
+  color: #F5F3F5;
+}
+
+.cta-container a {
+  border: 1px solid black;
+  border-radius: 2px;
+  padding: 10px;
+  font-weight: 400;
+  margin: 5px;
+  text-decoration: none;
+  color: black;
+}
+
+.search-container input {
+  padding: 10px;
+  font-size: 30px;
+  width: 600px;
+  border: 1px solid #F5F3F5;
+  border-radius: 4px 0 0 4px;
+}
+
+  .search-container input:focus {
+    outline: none;
+  }
+
+  .search-container input::placeholder {
+    color: lightgrey;
+  }
+
+.search-container button {
+  border: 1px solid #F5F3F5;
+  background-color: #332E3C;
+  color: #fff;
+  border-radius: 4px;
+  min-width: 75px;
+  font-weight: bold;
+}
+
+.input-group {
+  display: inline-flex;
+  background-color: #F5F3F5;
+  border-radius: 4px;
+}

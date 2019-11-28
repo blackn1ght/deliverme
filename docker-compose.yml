@@ -85,7 +85,7 @@ services:
       - deliverme_business_search_service
 
   deliverme_business_search_service:
-    build: ./apps/business-search-service/
+    build: ./services/business-search-service/
     container_name: deliverme_business_search_service
     environment:
       - ASPNETCORE_ENVIRONMENT=Production

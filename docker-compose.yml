@@ -1,11 +1,56 @@
-version: "3"
+version: '3.7'
+
+volumes:
+  elasticsearch:
+
+networks:
+  deliverme:
 
 services:
+
+  elasticsearch:
+    image: elasticsearch:6.5.3
+    volumes:
+      - elasticsearch:/usr/share/elasticsearch/data
+    networks:
+      - deliverme
+
+  kibana:
+    image: kibana:6.5.3
+    networks:
+      - deliverme
+
+  # filebeat:
+  #   image: docker.elastic.co/beats/filebeat:7.4.2
+  #   command: filebeat -e -strict.perms=false
+  #   volumes:
+  #     - ./logging/filebeat.yml:/usr/share/filebeat/filebeat.yml
+  #   networks:
+  #     - deliverme
+  #   links:
+  #     - elasticsearch
+  #     - kibana
+
+  # logstash:
+  #   image: logstash:7.4.2
+  #   command: -f /etc/logstash/conf.d/
+  #   volumes:
+  #     - ./logging/logstash.config:/etc/logstash/conf.d
+  #   ports:
+  #     - 5000:5000
+  #     - 5044:5044
+  #   networks:
+  #     - deliverme
+  #   depends_on:
+  #     - elasticsearch
+
   deliverme_header:
     build: ./apps/header/
     container_name: deliverme_header
     environment:
       - NODE_ENV=production
+    networks:
+      - deliverme
     expose:
       - "3100"
 
@@ -14,6 +59,8 @@ services:
     container_name: deliverme_homepage
     environment:
       - NODE_ENV=production
+    networks:
+      - deliverme
     expose:
       - "3001"
     links:
@@ -26,6 +73,8 @@ services:
     container_name: deliverme_lister
     environment:
       - NODE_ENV=production
+    networks:
+      - deliverme
     expose:
       - "3002"
     links:
@@ -40,29 +89,41 @@ services:
     container_name: deliverme_business_search_service
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
+    networks:
+      - deliverme
     expose:
       - "80"
     links:
-      - db
+      - deliverme_db
     depends_on:
-      - db
+      - deliverme_db
 
-  db:
+  deliverme_db:
     image: microsoft/mssql-server-linux:2017-latest
-    container_name: db
+    container_name: deliverme_db
     environment:
       - "ACCEPT_EULA=Y"
       - "SA_PASSWORD=pass123!"
+    networks:
+      - deliverme
     expose:
       - "1443"
 
-  nginx:
+  deliverme_nginx:
     image: nginx:latest
+    container_name: deliverme_nginx
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/.htpasswd:/etc/nginx/.htpasswd
+    networks:
+      - deliverme
     ports:
       - 3000:80
+      - 9200:9200
+      - 5601:5601
     depends_on:
       - deliverme_header
       - deliverme_homepage
       - deliverme_lister
+      - kibana
+      - elasticsearch

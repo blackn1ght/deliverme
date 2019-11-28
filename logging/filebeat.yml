@@ -1,0 +1,10 @@
+filebeat.inputs:
+  - type: docker
+    cointainers.ids: '*'
+    processors:
+      - add_docker_metadata: ~
+
+output.elasticsearch:
+  hosts: ["http://localhost:9200"]
+  username: "USERNAME"
+  password: "PASSWORD"

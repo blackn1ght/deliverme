@@ -6,10 +6,10 @@ const app = new express();
 app.use(express.static('src/public'));
 
 app.get('/', (req, res) => {
-  const host = 'http://localhost:3000';
+  // const host = 'http://localhost:3000';
   const html = fs.readFileSync(`${__dirname}/header.html`, 'utf-8');
   return res.json({
-    'css': `${host}/css/header-widget.css`,
+    'css': `/css/header-widget.css`,
     'js': '',
     'html': html
   });

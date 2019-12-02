@@ -8,7 +8,7 @@ RUN dotnet restore
 RUN dotnet publish src/BusinessSearchService.Api/BusinessSearchService.Api.csproj -c Release -o /app
 
 FROM base AS final
-EXPOSE 80
+EXPOSE 4001
 WORKDIR /app
 COPY --from=build-env /app .
 

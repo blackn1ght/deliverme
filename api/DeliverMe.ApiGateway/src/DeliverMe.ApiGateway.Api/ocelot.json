@@ -1,0 +1,6 @@
+{
+  "ReRoutes": [],
+  "GlobalConfiguration": {
+      "BaseUrl": "http://deliverme_api:4000"
+  }
+}

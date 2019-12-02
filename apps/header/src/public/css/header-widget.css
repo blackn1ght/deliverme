@@ -1,3 +1,8 @@
+body {
+  margin: 0;
+  font-family: 'Cabin', sans-serif;
+}
+
 .header-container {
   color: #F5F3F5;
   font-family: 'Cabin', sans-serif;
@@ -17,22 +22,27 @@
       text-decoration: none;
       color: #F5F3F5;
     }
+  
+  .header-container__controls {
+    display: flex;
+  }
 
-  .header-container__controls button {
+  .header-container__controls a {
     border-radius: 2px;
     padding: 7px 12px;
     font-size: 1.1rem;
     font-weight: 600;
+    text-decoration: none;
   }
 
-    .header-container__controls button#create-account {
+    .header-container__controls a#create-account {
       background-color: #F5F3F5;
       border: 1px solid #F5F3F5;
       margin-right: 10px;
       color: #1B264F;
     }
 
-    .header-container__controls button#login {
+    .header-container__controls a#login {
       background-color: inherit;
       border: 1px solid #F5F3F5;
       color: #F5F3F5;
